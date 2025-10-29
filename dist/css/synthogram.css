@@ -781,3 +781,106 @@ input[type="radio"] {
 }
 
 
+
+
+/* Export button styles */
+.export {
+    width: 40px;
+    height: 40px;
+}
+
+.export a:before {
+    left: 8px;
+    width: 24px;
+    height: 20px;
+    margin-top: -10px;
+    border: 2px solid #fff;
+    border-radius: 2px;
+    background: transparent;
+}
+
+.export a:after {
+    left: 16px;
+    width: 8px;
+    height: 8px;
+    margin-top: 2px;
+    border: 2px solid #fff;
+    border-top: none;
+    border-left: none;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.exporting {
+    background: #ff6b35;
+}
+
+.exporting a:before {
+    border-color: #fff;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+/* Export dialog styles */
+#exportDialog {
+    font-family: 'Times New Roman';
+    color: #fff;
+}
+
+#exportDialog .export-controls {
+    margin: 15px 0;
+}
+
+#exportDialog .export-duration {
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+#exportDialog .export-duration span {
+    font-weight: bold;
+    color: #30dcf0;
+}
+
+#exportDialog .export-buttons {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+#exportDialog button {
+    margin: 0 5px;
+    padding: 8px 16px;
+    font-size: 12px;
+    border: 1px solid #3985a8;
+    border-radius: 4px;
+    background: #104E8B;
+    color: #fff;
+    cursor: pointer;
+}
+
+#exportDialog button:hover {
+    background: #276cbf;
+}
+
+#exportDialog button:disabled {
+    background: #666;
+    cursor: not-allowed;
+}
+
+#exportDialog button:disabled:hover {
+    background: #666;
+}
+
+#exportProgress {
+    text-align: center;
+    font-size: 12px;
+    color: #30dcf0;
+}

@@ -1,5 +1,5 @@
 /*exported  synthogramInit */
-/*globals  window, ga, sgMainController, sgView, sgEventReporter, sgModel, CanvasSource, OscSynth, Sequencer */
+/*globals  window, ga, sgMainController, sgView, sgModel, CanvasSource, OscSynth, Sequencer, AudioRecorder */
 'use strict';
 
 function synthogramInit() {
@@ -33,7 +33,17 @@ function synthogramInit() {
     model.get('stepsPerSecond'), model.get('currentStep')
   );
 
-  var controller = sgMainController(model, view, sequencer, synth, source, eventReporter);
+  // Initialize audio recorder
+  var audioRecorder = null;
+  if (synth && synth.compressor) {
+    try {
+      audioRecorder = new AudioRecorder(synth.compressor.context, synth.compressor);
+    } catch (ex) {
+      console.log('Audio recorder initialization failed:', ex);
+    }
+  }
+
+  var controller = sgMainController(model, view, sequencer, synth, source, eventReporter, audioRecorder);
   controller.init();
 
   window.setTimeout(function() {
@@ -45,23 +55,22 @@ function synthogramInit() {
     (function (d, s, id) {
       var js, fjs = d.getElementsByTagName(s)[0];
       if (d.getElementById(id)) return;
-      js = d.createElement(s);
-      js.id = id;
+      js = d.createElement(s); js.id = id;
       js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=182352978632123";
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
-   
+     
 
   //Twitter
  !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
 
 
   //Google plus
-      (function() {
-        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-        po.src = 'https://apis.google.com/js/platform.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-      })();
+        (function() {
+          var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+          po.src = 'https://apis.google.com/js/platform.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+        })();
 
   /* jshint ignore:end */
 

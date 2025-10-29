@@ -2,7 +2,7 @@
 /*globals  Muscula, $, window, Firebase, sgResources */
 'use strict';
 
-function sgMainController(model, view, sequencer, synth, source, eventReporter) {
+function sgMainController(model, view, sequencer, synth, source, eventReporter, audioRecorder) {
   var settingsToSave = [
     'stepsPerSecond',
     'startFrequency',
@@ -126,7 +126,7 @@ function sgMainController(model, view, sequencer, synth, source, eventReporter) 
 
     sequencer.start();
 
-    view.init(getOscDataForY, saveImage);
+    view.init(getOscDataForY, saveImage, audioRecorder);
     loadImage();
   };
 
